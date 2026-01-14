@@ -274,16 +274,15 @@ else:
             dpf = 0.4 
 
         if st.button("Predict", key="predict_dialog_button"):
-    st.session_state.input_data = {
-        'Pregnancies': preg,
-        'Glucose': gluc,
-        'BloodPressure': bp,
-        'SkinThickness': skin,
-        'Insulin': ins,
-        'BMI': bmi,
-        'DiabetesPedigreeFunction': dpf,
-        'Age': age
-    }
+             st.session_state.input_data = {
+                'Pregnancies': preg,
+                'Glucose': gluc,
+                'BloodPressure': bp,
+                'SkinThickness': skin,
+                'Insulin': ins,
+                'BMI': bmi,
+                'DiabetesPedigreeFunction': dpf,
+                'Age': age}
     
     # Create a DataFrame instead of a list
     # This ensures the Imputer knows which column is which
@@ -472,3 +471,4 @@ else:
                 ax.legend()
 
                 st.pyplot(fig)
+
