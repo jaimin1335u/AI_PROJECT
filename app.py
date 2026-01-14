@@ -47,7 +47,6 @@ def create_html_report(name, input_data, result, probability):
             <p class="result {result_class}">Prediction: {result}</p>
             <p><strong>Probability of Diabetes:</strong> {probability:.2%}</p>
         </div>
-        <p class="disclaimer">Disclaimer: This is an AI prediction and not a medical diagnosis.</p>
     </body></html>
     """
 
@@ -72,7 +71,28 @@ def set_bg_from_local_file(file_name):
             background-size: cover; background-position: center; background-attachment: fixed;
         }}
         .form-container {{ background-color: rgba(255, 255, 255, 0.9); border-radius: 10px; padding: 25px; border: 1px solid #ddd; }}
-        [data-testid="stAppViewContainer"] .main h1, [data-testid="stAppViewContainer"] .main h2, .stMetric {{ color: #333 !important; text-shadow: 1px 1px 3px #FFF !important; text-align: center; }}
+        
+        /* UPDATED: Left-align headers and metrics */
+        [data-testid="stAppViewContainer"] .main h1, 
+        [data-testid="stAppViewContainer"] .main h2 {{ 
+            color: #ffffff !important; 
+            text-shadow: 2px 2px 4px #000000 !important; 
+            text-align: left !important; 
+        }}
+
+        [data-testid="stMetric"] {{
+            text-align: left !important;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start !important;
+        }}
+        
+        [data-testid="stMetricLabel"], [data-testid="stMetricValue"] {{
+            color: #ffffff !important;
+            text-shadow: 1px 1px 3px #000000 !important;
+            justify-content: flex-start !important;
+            text-align: left !important;
+        }}
         </style>
         """, unsafe_allow_html=True)
 
@@ -151,9 +171,12 @@ else:
             st.rerun()
 
         st.header("Model Performance")
-        st.metric(label="Model Accuracy", value=f"{accuracy:.2%}")
+        
+        # FIXED: Using columns to force the metric to the left
+        m_col1, m_col2 = st.columns([1, 4]) 
+        with m_col1:
+            st.metric(label="Model Accuracy", value=f"{accuracy:.2%}")
 
-        # ONLY Performance Tabs Included Now
         tabs = st.tabs(["Confusion Matrix", "ROC Curve", "Feature Importance"])
         
         with tabs[0]:
