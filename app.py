@@ -274,17 +274,24 @@ else:
             dpf = 0.4 
 
         if st.button("Predict", key="predict_dialog_button"):
-            # Save input data to session state
-            st.session_state.input_data = {
-                'Pregnancies': preg,
-                'Glucose': gluc,
-                'BloodPressure': bp,
-                'SkinThickness': skin,
-                'Insulin': ins,
-                'BMI': bmi,
-                'DiabetesPedigreeFunction': dpf,
-                'Age': age
-            }
+    st.session_state.input_data = {
+        'Pregnancies': preg,
+        'Glucose': gluc,
+        'BloodPressure': bp,
+        'SkinThickness': skin,
+        'Insulin': ins,
+        'BMI': bmi,
+        'DiabetesPedigreeFunction': dpf,
+        'Age': age
+    }
+    
+    # Create a DataFrame instead of a list
+    # This ensures the Imputer knows which column is which
+    input_df = pd.DataFrame([st.session_state.input_data])
+    
+    # Make prediction using the DataFrame
+    prediction_val = model.predict(input_df)[0]
+    probability_val = model.predict_proba(input_df)[0][1]
             
             # Prepare list for model
             input_list = [preg, gluc, bp, skin, ins, bmi, dpf, age]
@@ -463,4 +470,5 @@ else:
                 ax.set_xlabel(x_feat)
                 ax.set_ylabel(y_feat)
                 ax.legend()
+
                 st.pyplot(fig)
