@@ -284,13 +284,13 @@ else:
                 'DiabetesPedigreeFunction': dpf,
                 'Age': age}
     
-    # Create a DataFrame instead of a list
-    # This ensures the Imputer knows which column is which
-    input_df = pd.DataFrame([st.session_state.input_data])
+            # Create a DataFrame instead of a list
+            # This ensures the Imputer knows which column is which
+            input_df = pd.DataFrame([st.session_state.input_data])
     
-    # Make prediction using the DataFrame
-    prediction_val = model.predict(input_df)[0]
-    probability_val = model.predict_proba(input_df)[0][1]
+            # Make prediction using the DataFrame
+            prediction_val = model.predict(input_df)[0]
+            probability_val = model.predict_proba(input_df)[0][1]
             
             # Prepare list for model
             input_list = [preg, gluc, bp, skin, ins, bmi, dpf, age]
@@ -471,4 +471,5 @@ else:
                 ax.legend()
 
                 st.pyplot(fig)
+
 
