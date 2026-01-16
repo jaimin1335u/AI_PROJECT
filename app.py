@@ -47,6 +47,7 @@ def create_html_report(name, input_data, result, probability):
             <p class="result {result_class}">Prediction: {result}</p>
             <p><strong>Probability of Diabetes:</strong> {probability:.2%}</p>
         </div>
+        <p><strong>Disclaimer:</strong> This project is for educational purposes only.</p>
     </body></html>
     """
 
@@ -201,4 +202,5 @@ else:
                 ax.barh(feat_imp['Feature'], feat_imp['Importance'], color='teal')
                 st.pyplot(fig)
             except: st.error("Importance data unavailable.")
+
 
