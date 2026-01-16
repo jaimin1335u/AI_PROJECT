@@ -122,13 +122,13 @@ else:
         col1, col2 = st.columns(2)
         with col1:
             preg = st.number_input("Pregnancies", 0, 20, 0)
-            gluc = st.number_input("Glucose", 0.0, 300.0, 120.0)
-            bp = st.number_input("Blood Pressure", 0.0, 200.0, 70.0)
+            gluc = st.number_input("Glucose", 0.0, 2000.0, 120.0)
+            bp = st.number_input("Blood Pressure", 0.0, 400.0, 70.0)
             skin = st.number_input("Skin Thickness", 0.0, 100.0, 20.0)
         with col2:
-            ins = st.number_input("Insulin", 0.0, 900.0, 80.0)
+            ins = st.number_input("Insulin", 0.0, 2000.0, 80.0)
             bmi = st.number_input("BMI", 0.0, 70.0, 30.0)
-            age = st.number_input("Age", 1.0, 120.0, 30.0)
+            age = st.number_input("Age", 1.0, 130.0, 30.0)
             dpf = 0.4
 
         if st.button("Predict"):
@@ -201,3 +201,4 @@ else:
                 ax.barh(feat_imp['Feature'], feat_imp['Importance'], color='teal')
                 st.pyplot(fig)
             except: st.error("Importance data unavailable.")
+
